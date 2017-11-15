@@ -1,0 +1,40 @@
+<div class="tbl-container">
+    <div class="tbl-head">
+        <div class="tbl-cell"
+             *ngFor="let c of columns">
+            {{ c.header }}
+        </div>
+    </div>
+    <div class="tbl-body">
+        <div class="tbl-row"
+             *ngFor="let r of rows;">
+            <div class="tbl-cell"
+                 [ngClass]="{ 'tbl-cell-img': c.type == 'image' }"
+                 *ngFor="let c of columns">
+
+                <ng-template [ngIf]="c.template">
+                    <tpl-render [data]="r"
+                                [templateProvider]="c"></tpl-render>
+                </ng-template>
+                <ng-template [ngIf]="!c.template">
+                    <div class="tbl-cell-title">
+                        {{ c.header }}
+                    </div>
+                    <div class="tbl-cell-value"
+                         *ngIf="c.type == 'string'">
+                        {{ parseDotNotation(r, c.field) }}
+                    </div>
+                    <div class="tbl-cell-value"
+                         *ngIf="c.type == 'date'">
+                        {{ parseDotNotation(r, c.field) | date:'longDate' }}
+                    </div>
+                    <div class="tbl-cell-value"
+                         *ngIf="c.type == 'money'">
+                        {{ parseDotNotation(r, c.field) | currency:'USD':'$' }}
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>

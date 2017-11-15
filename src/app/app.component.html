@@ -1,0 +1,53 @@
+<h1>Using ContentChildren decorator</h1>
+
+<rtable [rows]="books">
+    <rtable-cell header="Thumbnail"
+                 type="image">
+        <ng-template #template
+                     let-book>
+            <img src="/assets/{{ book.imageSrc }}">
+        </ng-template>
+    </rtable-cell>
+    <rtable-cell header="ISBN"
+                 field="isbn"></rtable-cell>
+    <rtable-cell header="Title"
+                 field="title"></rtable-cell>
+    <rtable-cell header="Date Published"
+                 field="publish.datePublished"
+                 type="date"></rtable-cell>
+    <rtable-cell header="Published By"
+                 field="publish.publisherName"></rtable-cell>
+    <rtable-cell header="Author"
+                 field="author"></rtable-cell>
+    <rtable-cell header="Price"
+                 field="price"
+                 type="money"></rtable-cell>
+    <rtable-cell header="Action">
+        <ng-template #template
+                     let-book>
+            <button>Buy Now</button>
+            <button>Add to Wishlist</button>
+        </ng-template>
+    </rtable-cell>
+</rtable>
+
+<h1>Using &lt;ng-content&gt;</h1>
+<test-table>
+    <test-table-head>
+        <test-table-cell>ISBN</test-table-cell>
+        <test-table-cell>Title</test-table-cell>
+        <test-table-cell>Date Published</test-table-cell>
+        <test-table-cell>Published By</test-table-cell>
+        <test-table-cell>Author</test-table-cell>
+        <test-table-cell>Action</test-table-cell>
+    </test-table-head>
+    <test-table-body>
+        <test-table-row *ngFor="let book of books;">
+            <test-table-cell>{{ book.isbn }}</test-table-cell>
+            <test-table-cell>{{ book.title }}</test-table-cell>
+            <test-table-cell>{{ book.publish.datePublished }}</test-table-cell>
+            <test-table-cell>{{ book.publish.publisherName }}</test-table-cell>
+            <test-table-cell>{{ book.author }}</test-table-cell>
+        </test-table-row>
+    </test-table-body>
+</test-table>
